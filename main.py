@@ -14,7 +14,7 @@ async def hello(ctx):
 
 @bot.slash_command(description="Ping pong!")
 async def ping(ctx):
-    await ctx.respond('Pong! {0}'.format(round(bot.latency, 1)))
+    await ctx.respond('Pong! {0}'.format(round(bot.latency * 1000)))
 
 from cogs import money
 bot.add_cog(money.Money(bot))
