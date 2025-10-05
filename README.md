@@ -2,6 +2,8 @@
 
 <img src="notme.svg" width="128" alt="NOTME Logo" />
 
+<video src="readme/example.mov" width="256"></video>
+
 A Discord bot made for Hack Club Siege. Depending on future themes, I will either continue developing it during Siege, or wait for the end.
 
 The name is certainly not a reference to that one other Discord bot that sucks but is also one of the most popular bots on the platform.
