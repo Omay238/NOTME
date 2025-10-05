@@ -2,7 +2,7 @@
 
 ##### Probably isn't active, because I have no money for hosting.
 
-<img src="notme.svg" width="128" alt="NOTME Logo" />
+<img src="readme/notme.svg" width="128" alt="NOTME Logo" />
 
 A Discord bot made for Hack Club Siege. Depending on future themes, I will either continue developing it during Siege, or wait for the end.
 
