@@ -19,6 +19,9 @@ async def ping(ctx):
 from cogs import money
 bot.add_cog(money.Money(bot))
 
+from cogs import music
+bot.add_cog(music.Music(bot))
+
 from dotenv import load_dotenv
 import os
 load_dotenv()
