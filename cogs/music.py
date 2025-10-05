@@ -32,7 +32,47 @@ class Music(discord.Cog):
 		if song[:4] == "http":
 			self.queue.append(pytubefix.YouTube(song))
 		else:
-			self.queue.append(pytubefix.Search(song).videos[0])
+			search = pytubefix.Search(song)
+
+			class SongView(discord.ui.View):
+				def __init__(self, author_id):
+					super().__init__(timeout=30)
+					self.author_id = author_id
+					self.choice = None
+
+				async def handle_choice(self, interaction: discord.Interaction, number: int):
+					if interaction.user.id != self.author_id:
+						return
+					self.choice = number
+					self.stop()
+
+				@discord.ui.button(label="1")
+				async def button_1(self, _button, interaction: discord.Interaction):
+					await self.handle_choice(interaction, 0)
+
+				@discord.ui.button(label="2")
+				async def button_2(self, _button, interaction: discord.Interaction):
+					await self.handle_choice(interaction, 1)
+
+				@discord.ui.button(label="3")
+				async def button_3(self, _button, interaction: discord.Interaction):
+					await self.handle_choice(interaction, 2)
+
+				@discord.ui.button(label="4")
+				async def button_4(self, _button, interaction: discord.Interaction):
+					await self.handle_choice(interaction, 3)
+
+				@discord.ui.button(label="5")
+				async def button_5(self, _button, interaction: discord.Interaction):
+					await self.handle_choice(interaction, 4)
+
+			view = SongView(ctx.author.id)
+
+			await ctx.send_followup(f"1. {search.videos[0].title} - {search.videos[0].author}\n2. {search.videos[1].title} - {search.videos[1].author}\n3. {search.videos[2].title} - {search.videos[2].author}\n4. {search.videos[3].title} - {search.videos[3].author}\n5. {search.videos[4].title} - {search.videos[4].author}", view=view)
+
+			await view.wait()
+			if view.choice is not None:
+				self.queue.append(search.videos[view.choice])
 
 		if not ctx.voice_client.is_playing():
 			await self.play_song(ctx)
